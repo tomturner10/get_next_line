@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-unsigned int	ft_strlcat(char *dest, const char *src, size_t dstsize)
+static unsigned int	ft_strlcat(char *dest, const char *src, size_t dstsize)
 {
 	size_t	j;
 	size_t	destlen;
@@ -20,7 +20,7 @@ unsigned int	ft_strlcat(char *dest, const char *src, size_t dstsize)
 	return (destlen + srclen);
 }
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+static unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
 	unsigned int	i;
 

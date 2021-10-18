@@ -1,7 +1,7 @@
 #include "get_next_line.h"
 
 
-int	ft_strlen(const char *s)
+static int	ft_strlen(const char *s)
 {
 	int	i;
 
@@ -13,7 +13,7 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_append(char *line, char *buf)
+static char	*ft_append(char *line, char *buf)
 {
 	if (line == NULL)
 		return (ft_strdup(buf));
@@ -21,7 +21,7 @@ char	*ft_append(char *line, char *buf)
 		return (ft_strjoin(line, buf));
 }
 
-char	*ft_trim(char *line)
+static char	*ft_trim(char *line)
 {
 	char *rtn;
 	int i;
@@ -36,14 +36,14 @@ char	*ft_trim(char *line)
 	rtn = (char *)malloc((i + 1) * sizeof(char));
 	if (rtn == NULL)
 		return (NULL);
-	rtn[i] = '\0'
+	rtn[i] = '\0';
 	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
 		rtn[i] = line[i];
 	return (rtn);
 }
 
-char	*ft_overwrite(char *line)
+static char	*ft_overwrite(char *line)
 {
 	char	*rtn;
 	int i;
