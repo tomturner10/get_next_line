@@ -1,23 +1,15 @@
 #include "get_next_line.h"
 
-static unsigned int	ft_strlcat(char *dest, const char *src, size_t dstsize)
+int	ft_strlen(char *s)
 {
-	size_t	j;
-	size_t	destlen;
-	size_t	srclen;
+	int	i;
 
-	j = 0;
-	destlen = ft_strlen(dest);
-	srclen = ft_strlen(src);
-	while (j + destlen < dstsize - 1 && src[j] != '\0' && dstsize != 0)
-	{
-		dest[destlen + j] = src[j];
-		j++;
-	}
-	dest[destlen + j] = '\0';
-	if (destlen >= dstsize)
-		destlen = dstsize;
-	return (destlen + srclen);
+	i = 0;
+	if (s == NULL)
+		return (i);
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
 
 static unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
@@ -42,45 +34,51 @@ static unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strchr(char *s, int c)
 {
 	int	i;
 
 	i = 0;
 	if (s == NULL)
-		return (NULL);
+		return (0);
 	while (s[i] != '\0' )
 	{
 		if (s[i] == (char)c)
-			return ((char *)&s[i]);
+			return (1);
 		i++;
 	}
 	if (s[i] == c)
-		return ((char *)&s[i]);
-	return (NULL);
+		return (1);
+	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *line, char *buf)
 {
-	char			*rtn;
-	unsigned int	s1len;
-	unsigned int	s2len;
+	char	*rtn;
+	int		i;
+	int		j;
 
-	s1len = 0;
-	s2len = 0;
-	rtn = (char *)malloc((s1len + s2len) * sizeof(char));
-	while (s1[s1len] != '\0')
-		s1len++;
-	while (s2[s2len] != '\0')
-		s2len++;
-	if (rtn == NULL)
+	if (buf == NULL)
 		return (NULL);
-	ft_strlcpy(rtn, (char *)s1, s1len + 1);
-	ft_strlcat(rtn, s2, s1len + s2len + 1);
+	i = 0;
+	j = 0;
+	rtn = (char *)malloc(sizeof(char) * (ft_strlen(line) + ft_strlen(buf) + 1));
+	while (line[i] != '\0')
+	{
+		rtn[i] = line[i];
+		i++;
+	}
+	while (buf[j] != '\0')
+	{
+		rtn[i + j] = buf[j];
+		j++;
+	}
+	rtn[i + j] = '\0';
+	free(line);
 	return (rtn);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	char			*str;
 	unsigned int	s1len;

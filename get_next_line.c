@@ -1,18 +1,5 @@
 #include "get_next_line.h"
 
-
-static int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
 static char	*ft_append(char *line, char *buf)
 {
 	if (line == NULL)
@@ -25,10 +12,14 @@ static char	*ft_trim(char *line)
 {
 	char *rtn;
 	int i;
+	int j;
 
 	i = 0;
+	j = 0;
 	if (line == NULL || line[0] == '\0')
 		return (NULL);
+	else if (ft_strchr(line, '\n') == 0)
+		return (ft_strdup(line));
 	while (line[i] != '\0' && line[i] != '\n')
 		i++;
 	if (line[i] == '\n')
@@ -38,8 +29,12 @@ static char	*ft_trim(char *line)
 		return (NULL);
 	rtn[i] = '\0';
 	i = 0;
-	while (line[i] != '\0' && line[i] != '\n')
-		rtn[i] = line[i];
+	while (line[j] != '\0')
+	{
+		rtn[j] = line[j];
+		if (line[j++] == '\n')
+			break ;
+	}
 	return (rtn);
 }
 
@@ -64,7 +59,7 @@ static char	*ft_overwrite(char *line)
 	i++;
 	while (i + j < ft_strlen(line) && line[i + j] != '\0')
 	{
-		rtn[j] = line[i = j];
+		rtn[j] = line[i + j];
 		j++;
 	}
 	rtn[j] = '\0';
@@ -74,12 +69,13 @@ static char	*ft_overwrite(char *line)
 
 char	*get_next_line(int fd)
 {
-	char *line;
+	static char *line;
 	char *buf;
 	int r;
-
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (buf == NULL || fd < 0 || BUFFER_SIZE < 0)
+	if (buf == NULL)
 		return (NULL);
 	r = 1;
 	while (ft_strchr(line, '\n') == 0 && r != 0)
@@ -94,10 +90,4 @@ char	*get_next_line(int fd)
 	buf = ft_trim(line);
 	line = ft_overwrite(line);
 	return (buf);
-}
-
-int	main(void)
-{
-	FILE *fd = fopen("test.txt", "r");
-	get_next_line(fileno(fd));
 }
