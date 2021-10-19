@@ -1,17 +1,5 @@
 #include "get_next_line.h"
 
-int	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s == NULL)
-		return (i);
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
 static unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
 	unsigned int	i;
@@ -33,6 +21,19 @@ static unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 		i++;
 	return (i);
 }
+
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (s == NULL)
+		return (i);
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
 
 int	ft_strchr(char *s, int c)
 {
