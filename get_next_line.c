@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tturner <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/20 13:45:48 by tturner           #+#    #+#             */
+/*   Updated: 2021/10/20 13:45:48 by tturner          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 static char	*ft_append(char *line, char *buf)
@@ -10,9 +22,9 @@ static char	*ft_append(char *line, char *buf)
 
 static char	*ft_trim(char *line)
 {
-	char *rtn;
-	int i;
-	int j;
+	char	*rtn;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -28,7 +40,6 @@ static char	*ft_trim(char *line)
 	if (rtn == NULL)
 		return (NULL);
 	rtn[i] = '\0';
-	i = 0;
 	while (line[j] != '\0')
 	{
 		rtn[j] = line[j];
@@ -41,8 +52,8 @@ static char	*ft_trim(char *line)
 static char	*ft_overwrite(char *line)
 {
 	char	*rtn;
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -69,9 +80,10 @@ static char	*ft_overwrite(char *line)
 
 char	*get_next_line(int fd)
 {
-	static char *line;
-	char *buf;
-	int r;
+	static char	*line;
+	char		*buf;
+	int			r;
+
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
@@ -82,7 +94,7 @@ char	*get_next_line(int fd)
 	{
 		r = read(fd, buf, BUFFER_SIZE);
 		if (r < 0)
-			break;
+			break ;
 		buf[r] = '\0';
 		line = ft_append(line, buf);
 	}

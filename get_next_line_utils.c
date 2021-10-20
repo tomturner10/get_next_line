@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tturner <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/20 13:45:48 by tturner           #+#    #+#             */
+/*   Updated: 2021/10/20 13:45:48 by tturner          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 static unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
@@ -33,7 +45,6 @@ int	ft_strlen(char *s)
 		i++;
 	return (i);
 }
-
 
 int	ft_strchr(char *s, int c)
 {
